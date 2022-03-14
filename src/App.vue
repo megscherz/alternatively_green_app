@@ -10,6 +10,8 @@
     |
     <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
     |
+    <router-link v-if="isLoggedIn" to="/users/me">User Account</router-link>
+    |
     <router-link to="/products">All Products</router-link>
     |
   </div>
