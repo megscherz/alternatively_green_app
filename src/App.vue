@@ -4,17 +4,37 @@
     |
     <router-link to="/about">About</router-link>
     |
-    <router-link to="/signup">Signup</router-link>
+    <router-link v-if="!isLoggedIn" to="/signup">Signup</router-link>
     |
-    <router-link to="/login">Login</router-link>
+    <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
     |
-    <router-link to="/logout">Logout</router-link>
+    <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
     |
     <router-link to="/products">All Products</router-link>
     |
   </div>
   <router-view />
 </template>
+
+<script>
+export default {
+  data: function () {
+    return {
+      isLoggedIn: !!localStorage.jwt,
+    };
+  },
+  watch: {
+    $route: function () {
+      this.isLoggedIn = !!localStorage.jwt;
+    },
+  },
+  methods: {
+    // isLoggedIn: function () {
+    //   return localStorage.getItem("jwt");
+    // }
+  },
+};
+</script>
 
 <style>
 #app {
