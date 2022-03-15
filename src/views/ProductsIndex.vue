@@ -33,7 +33,8 @@ export default {
     <h1>All Products</h1>
     <div v-for="product in products" v-bind:key="product.id">
       <h2>{{ product.name }}</h2>
-      <button v-on:click="`/products/${product.id}`">See Alternatives</button>
+      <img v-bind:src="product.image_url" v-bind:alt="product.name" />
+      <router-link v-bind:to="`/products/${product.id}`">See Alternatives</router-link>
       <button v-on:click="showProduct(product)">More Info</button>
     </div>
     <br />
