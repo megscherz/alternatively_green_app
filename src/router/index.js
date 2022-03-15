@@ -6,24 +6,18 @@ import Logout from "../views/Logout.vue";
 import UsersShow from "../views/UsersShow.vue";
 import ProductsIndex from "../views/ProductsIndex.vue";
 import ProductsShow from "../views/ProductsShow.vue";
+import ProductsNew from "../views/ProductsNew.vue";
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/about",
-    name: "About",
-    component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
+  { path: "/", name: "Home", component: Home },
+  { path: "/about", name: "About", component: () => import(/* webpackChunkName: "about" */ "../views/About.vue") },
   { path: "/signup", name: "signup", component: Signup },
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
   { path: "/users/me", name: "users-show", component: UsersShow },
   { path: "/products", name: "products-index", component: ProductsIndex },
   { path: "/products/:id", name: "products-show", component: ProductsShow },
+  { path: "/products/new", name: "products-new", component: ProductsNew },
 ];
 
 const router = createRouter({

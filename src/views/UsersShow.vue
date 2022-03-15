@@ -4,7 +4,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      users: [],
+      user: [],
       currentUser: {},
       editUserParams: {},
     };
@@ -19,7 +19,7 @@ export default {
     showUser: function (user) {
       this.currentUser = user;
       this.editUserParams = user;
-      document.querySelector("#user-details").showModal();
+      document.querySelector("#users-details").showModal();
     },
     updateUser: function () {
       axios
@@ -47,11 +47,10 @@ export default {
 <template>
   <div class="users-show">
     <h1>User Account:</h1>
+    <img v-bind:src="user.image_url" alt="" />
     <h2>Name: {{ user.first_name + " " + user.last_name }}</h2>
     <h2>Username: {{ user.user_name }}</h2>
     <h2>Email: {{ user.email }}</h2>
-    <img v-bind:src="user.image_url" alt="" />
-    <br />
     <button v-on:click="showUser(user)">Update User</button>
   </div>
   <div>

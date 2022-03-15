@@ -14,6 +14,7 @@
     |
     <router-link to="/products">All Products</router-link>
     |
+    <router-link v-if="isLoggedIn" to="/products/new">Add a New Product</router-link>
   </div>
   <router-view />
 </template>
