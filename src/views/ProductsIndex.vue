@@ -6,6 +6,9 @@ export default {
     return {
       products: [],
       currentProduct: [],
+      reviews: [],
+      currentReview: [],
+      newReviewParams: {},
     };
   },
   created: function () {
@@ -34,19 +37,10 @@ export default {
     <div v-for="product in products" v-bind:key="product.id">
       <h2>{{ product.name }}</h2>
       <img v-bind:src="product.image_url" v-bind:alt="product.name" />
+      <br />
       <router-link v-bind:to="`/products/${product.id}`">See Alternatives</router-link>
-      <button v-on:click="showProduct(product)">More Info</button>
     </div>
     <br />
-    <dialog id="product-details">
-      <form method="dialog">
-        <img v-bind:src="currentProduct.image_url" alt="" />
-        <p>Description: {{ currentProduct.description }}</p>
-        <p>Price: {{ currentProduct.price }}</p>
-        <p>Ingredients: {{ currentProduct.ingredients }}</p>
-        <button>Close</button>
-      </form>
-    </dialog>
   </div>
 </template>
 

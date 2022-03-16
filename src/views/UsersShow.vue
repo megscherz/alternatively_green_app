@@ -16,10 +16,8 @@ export default {
     });
   },
   methods: {
-    showUser: function (user) {
-      this.currentUser = user;
-      this.editUserParams = user;
-      document.querySelector("#users-details").showModal();
+    showUser: function () {
+      document.querySelector("#user-details").showModal();
     },
     updateUser: function () {
       axios
@@ -51,7 +49,7 @@ export default {
     <h2>Name: {{ user.first_name + " " + user.last_name }}</h2>
     <h2>Username: {{ user.user_name }}</h2>
     <h2>Email: {{ user.email }}</h2>
-    <button v-on:click="showUser(user)">Update User</button>
+    <button v-on:click="showUser()">Update User</button>
   </div>
   <div>
     <dialog id="user-details">
@@ -59,25 +57,25 @@ export default {
         <h2>Edit User</h2>
         <p>
           First Name:
-          <input type="text" v-model="editUserParams.first_name" />
+          <input type="text" v-model="user.first_name" />
         </p>
         <p>
           Last Name:
-          <input type="text" v-model="editUserParams.last_name" />
+          <input type="text" v-model="user.last_name" />
         </p>
         <p>
           Username:
-          <input type="text" v-model="editUserParams.user_name" />
+          <input type="text" v-model="user.user_name" />
         </p>
         <p>
           Email:
-          <input type="email" v-model="editUserParams.email" />
+          <input type="email" v-model="user.email" />
         </p>
         <p>
           Profile Picture:
-          <input type="text" v-model="editUserParams.image_url" />
+          <input type="text" v-model="user.image_url" />
         </p>
-        <button v-on:click="updateUser(user)">Update</button>
+        <button v-on:click="updateUser()">Update</button>
         <button v-on:click="destroyUser()">Delete</button>
         <br />
         <button>Close</button>

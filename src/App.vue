@@ -16,7 +16,7 @@
     |
     <router-link v-if="isLoggedIn" to="/products/new">Add a New Product</router-link>
   </div>
-  <router-view />
+  <router-view :key="$route.fullPath" />
 </template>
 
 <script>

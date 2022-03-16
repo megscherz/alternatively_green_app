@@ -7,6 +7,7 @@ import UsersShow from "../views/UsersShow.vue";
 import ProductsIndex from "../views/ProductsIndex.vue";
 import ProductsShow from "../views/ProductsShow.vue";
 import ProductsNew from "../views/ProductsNew.vue";
+// import ReviewsNew from "../views/ReviewsNew.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
@@ -18,6 +19,7 @@ const routes = [
   { path: "/products", name: "products-index", component: ProductsIndex },
   { path: "/products/:id", name: "products-show", component: ProductsShow },
   { path: "/products/new", name: "products-new", component: ProductsNew },
+  // { path: "/reviews/new", name: "reviews-new", component: ReviewsNew },
 ];
 
 const router = createRouter({
