@@ -40,7 +40,6 @@ export default {
       <br />
       <router-link v-bind:to="`/products/${product.id}`">See Alternatives</router-link>
     </div>
-    <br />
   </div>
 </template>
 

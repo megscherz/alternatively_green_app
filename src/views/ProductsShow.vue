@@ -6,6 +6,7 @@ export default {
     return {
       product: {},
       currentProduct: [],
+      review: {},
       newReviewParams: {},
       errors: {},
     };
@@ -27,12 +28,12 @@ export default {
       axios
         .post("/reviews", this.newReviewParams)
         .then((response) => {
-          console.log("reviews create", response.data);
-          this.$router.push("/reviews");
+          console.log("review new", response);
+          this.review.push("/reviews");
           this.newReviewParams = {};
         })
         .catch((error) => {
-          console.log("reviews create error", error.response);
+          console.log(error.response.data.errors);
         });
     },
     showReview: function (review) {
@@ -58,14 +59,17 @@ export default {
         <p>{{ review.title }}</p>
         <p>{{ review.image_url }}</p>
         <p>{{ review.body }}</p>
-        <p>{{ review.star_rating }}</p>
-        <button v-on:click="createReview(review)">Add Your Review</button>
+        <p>{{ review.star_rating }}/5</p>
+        <button v-on:click="createReview()">Add Your Review</button>
       </div>
-      <div>
-        <dialog id="reviews-new">
-          <form method="dialog">
+      <div class="review-new">
+        <dialog>
+          <form v-on:submit.prevent="createReview()">
             <h1>New Review</h1>
-            <div>
+            <ul>
+              <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+            </ul>
+            <div v-for="review in product.reviews" v-bind:key="review.id">
               Title:
               <input type="text" v-model="newReviewParams.title" />
               Image:
@@ -74,7 +78,8 @@ export default {
               <input type="text" v-model="newReviewParams.body" />
               Star Rating:
               <input type="text" v-model="newReviewParams.star_rating" />
-              <button v-on:click="createReview()">Create Review</button>
+              <input type="submit" value="Submit" />
+              <button>Close</button>
             </div>
           </form>
         </dialog>
@@ -83,21 +88,11 @@ export default {
     <div v-for="alternative in product.alternatives" :key="alternative.id">
       <img v-bind:src="alternative.image_url" alt="" />
       <h1>{{ alternative.name }}</h1>
-      <router-link v-bind:to="`/products/${alternative.id}`">See Alternative</router-link>
+      <router-link v-bind:to="`/products/${alternative.id}`">See Alternatives</router-link>
       <br />
-      <div>
-        <dialog id="product-details">
-          <form method="dialog">
-            <img v-bind:src="alternative.image_url" v-bind:alt="product.name" />
-            <p>Description: {{ alternative.description }}</p>
-            <p>Price: {{ alternative.price }}</p>
-            <p>Ingredients: {{ alternative.ingredients }}</p>
-            <button>Close</button>
-          </form>
-        </dialog>
-      </div>
     </div>
   </div>
+  <router-link v-bind:to="`/products`">Back to All Products</router-link>
 </template>
 
 <style></style>

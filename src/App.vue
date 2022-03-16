@@ -1,8 +1,6 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>
-    |
-    <router-link to="/about">About</router-link>
+    <router-link to="/products">All Products</router-link>
     |
     <router-link v-if="!isLoggedIn" to="/signup">Signup</router-link>
     |
@@ -11,8 +9,6 @@
     <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
     |
     <router-link v-if="isLoggedIn" to="/users/me">User Account</router-link>
-    |
-    <router-link to="/products">All Products</router-link>
     |
     <router-link v-if="isLoggedIn" to="/products/new">Add a New Product</router-link>
   </div>
