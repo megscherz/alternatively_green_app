@@ -7,7 +7,9 @@ export default {
       product: {},
       currentProduct: [],
       review: {},
-      newReviewParams: {},
+      newReviewParams: {
+        product_id: this.$route.params.id,
+      },
       errors: {},
     };
   },
@@ -28,8 +30,8 @@ export default {
       axios
         .post("/reviews", this.newReviewParams)
         .then((response) => {
-          console.log("review new", response);
-          this.review.push("/reviews");
+          console.log("review create", response);
+          this.reviews.push("/reviews");
           this.newReviewParams = {};
         })
         .catch((error) => {
@@ -40,51 +42,78 @@ export default {
       this.currentReview = review;
       document.querySelector("#review-details").showModal();
     },
-  },
+    updateReview: function (review) {
+      axios
+        .patch("/reviews" + review.id, this.newReviewParams)
+        .then((response) => {
+          console.log("reviews update", response);
+          this.currentReview = {};
+        })
+        .catch((error) => {
+          console.log(error.response.data.errors);
+        });
+    },
+    destroyReview: function (review) {
+      axios
+        .delete("/reviews" + review.id)
+        .then((response) => {
+          console.log("reviews destroy", response);
+          var index = this.review.indexOf(review);
+          this.reviews.splice(index, 1);
+      }
+    },
+  }
 };
 </script>
 
 <template>
   <div class="products-show">
     <div>
-      <h1>Alternatives for {{ product.name }}</h1>
+      <h1>{{ product.name }}</h1>
       <img v-bind:src="product.image_url" alt="" />
       <p>Description: {{ product.description }}</p>
       <p>Price: ${{ product.price }}</p>
       <p>Ingredients: {{ product.ingredients }}</p>
     </div>
     <div>
-      <h3>Reviews of {{ product.name }}</h3>
+      <h3>Reviews:</h3>
+
       <div v-for="review in product.reviews" v-bind:key="review.id">
-        <p>{{ review.title }}</p>
+        <p>User:{{ review.user.user_name }} says...</p>
+        <p>Title:{{ review.title }}</p>
         <p>{{ review.image_url }}</p>
         <p>{{ review.body }}</p>
         <p>{{ review.star_rating }}/5</p>
-        <button v-on:click="createReview()">Add Your Review</button>
       </div>
-      <div class="review-new">
-        <dialog>
-          <form v-on:submit.prevent="createReview()">
+      <button v-on:click="showReview()">Add Your Review Here</button>
+      <div>
+        <dialog id="review-details">
+          <form method="dialog">
             <h1>New Review</h1>
             <ul>
               <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
             </ul>
-            <div v-for="review in product.reviews" v-bind:key="review.id">
+            <div>
               Title:
               <input type="text" v-model="newReviewParams.title" />
+              <br />
               Image:
               <input type="text" v-model="newReviewParams.image_url" />
+              <br />
               Review:
-              <input type="text" v-model="newReviewParams.body" />
+              <textarea rows="5" cols="60" v-model="newReviewParams.body"></textarea>
+              <br />
               Star Rating:
               <input type="text" v-model="newReviewParams.star_rating" />
-              <input type="submit" value="Submit" />
+              <br />
+              <button v-on:click="createReview(review)">Create</button>
               <button>Close</button>
             </div>
           </form>
         </dialog>
       </div>
     </div>
+    <h3>Alternatives for {{ product.name }}</h3>
     <div v-for="alternative in product.alternatives" :key="alternative.id">
       <img v-bind:src="alternative.image_url" alt="" />
       <h1>{{ alternative.name }}</h1>

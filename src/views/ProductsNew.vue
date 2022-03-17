@@ -43,11 +43,11 @@ export default {
       <div>
         <label>Category:</label>
         <br />
-        <input type="radio" id="green_product" name="category" value="green" />
-        <label for="green_product">Green Product</label>
+        <input type="radio" id="green" name="category" value="green" v-model="newProductParams.category" />
+        <label for="green">Green Product</label>
         <br />
-        <input type="radio" id="standard_product" name="category" value="standard" />
-        <label for="standard_product">Standard Product</label>
+        <input type="radio" id="standard" name="category" value="standard" v-model="newProductParams.category" />
+        <label for="standard">Standard Product</label>
       </div>
       <div>
         <label>Image:</label>
