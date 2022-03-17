@@ -6,8 +6,12 @@ export default {
     return {
       product: {},
       currentProduct: [],
-      review: {},
+      reviews: {},
+      currentReview: [],
       newReviewParams: {
+        product_id: this.$route.params.id,
+      },
+      editReviewParams: {
         product_id: this.$route.params.id,
       },
       errors: {},
@@ -40,11 +44,12 @@ export default {
     },
     showReview: function (review) {
       this.currentReview = review;
+      this.editReviewParams = review;
       document.querySelector("#review-details").showModal();
     },
     updateReview: function (review) {
       axios
-        .patch("/reviews" + review.id, this.newReviewParams)
+        .patch("/reviews/" + review.id, this.editReviewParams)
         .then((response) => {
           console.log("reviews update", response);
           this.currentReview = {};
@@ -54,15 +59,13 @@ export default {
         });
     },
     destroyReview: function (review) {
-      axios
-        .delete("/reviews" + review.id)
-        .then((response) => {
-          console.log("reviews destroy", response);
-          var index = this.review.indexOf(review);
-          this.reviews.splice(index, 1);
-      }
+      axios.delete("/reviews" + review.id).then((response) => {
+        console.log("reviews destroy", response);
+        var index = this.review.indexOf(review);
+        this.reviews.splice(index, 1);
+      });
     },
-  }
+  },
 };
 </script>
 
@@ -77,38 +80,38 @@ export default {
     </div>
     <div>
       <h3>Reviews:</h3>
-
       <div v-for="review in product.reviews" v-bind:key="review.id">
-        <p>User:{{ review.user.user_name }} says...</p>
+        <p>{{ review.user.user_name }} says...</p>
         <p>Title:{{ review.title }}</p>
         <p>{{ review.image_url }}</p>
-        <p>{{ review.body }}</p>
+        <p>Review:{{ review.body }}</p>
         <p>{{ review.star_rating }}/5</p>
       </div>
       <button v-on:click="showReview()">Add Your Review Here</button>
+      <button v-on:click="updateReview(currentReview)">Update Review</button>
       <div>
         <dialog id="review-details">
           <form method="dialog">
             <h1>New Review</h1>
-            <ul>
-              <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-            </ul>
-            <div>
+            <p>
               Title:
               <input type="text" v-model="newReviewParams.title" />
-              <br />
+            </p>
+            <p>
               Image:
               <input type="text" v-model="newReviewParams.image_url" />
-              <br />
+            </p>
+            <p>
               Review:
               <textarea rows="5" cols="60" v-model="newReviewParams.body"></textarea>
-              <br />
+            </p>
+            <p>
               Star Rating:
               <input type="text" v-model="newReviewParams.star_rating" />
-              <br />
-              <button v-on:click="createReview(review)">Create</button>
-              <button>Close</button>
-            </div>
+            </p>
+            <button v-on:click="createReview()">Create</button>
+            <button v-on:click="destroyReview(currentReview)">Delete</button>
+            <button>Close</button>
           </form>
         </dialog>
       </div>
