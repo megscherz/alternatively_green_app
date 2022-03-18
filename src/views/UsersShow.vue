@@ -44,12 +44,81 @@ export default {
 
 <template>
   <div class="users-show">
-    <h1>User Account:</h1>
-    <img v-bind:src="user.image_url" alt="" />
-    <h2>Name: {{ user.first_name + " " + user.last_name }}</h2>
-    <h2>Username: {{ user.user_name }}</h2>
-    <h2>Email: {{ user.email }}</h2>
-    <button v-on:click="showUser()">Update User</button>
+    <main>
+      <!-- Page Title -->
+      <!-- <section class="parallax effect-section page-heading" style="background-image: url(static/img/1600x900.jpg)">
+        <div class="mask bg-black opacity-8"></div>
+        <div class="container position-relative">
+          <div class="row align-items-center justify-content-center min-vh-40">
+            <div class="col-lg-8 text-center">
+              <h1 class="display-4 text-white m-0">User Account</h1>
+              <ol class="breadcrumb light mb-0 mt-3 justify-content-center">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User Account</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      <!-- End Page Title -->
+      <!-- Section -->
+      <section class="section">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-5 col-xl-6">
+                      <div
+                        class="owl-carousel owl-nav-rounded"
+                        data-items="1"
+                        data-nav-arrow="true"
+                        data-nav-dots="false"
+                        data-lg-items="1"
+                        data-md-items="1"
+                        data-sm-items="1"
+                        data-xs-items="1"
+                        data-space="20"
+                        data-autoplay="true"
+                      >
+                        <div>
+                          <img class="rounded" v-bind:src="user.image_url" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-7 col-xl-6">
+                      <div class="bg-dark d-inline-block py-3 px-5 rounded mt-3 mb-5">
+                        <h3 class="text-primary">{{ user.first_name + " " + user.last_name }}'s Account</h3>
+                      </div>
+                      <div class="py-1">
+                        <label class="h6 m-0 pe-3">Name:</label>
+                        <span>{{ user.first_name + " " + user.last_name }}</span>
+                      </div>
+                      <div class="py-1">
+                        <label class="h6 m-0 pe-3">Username:</label>
+                        <span>{{ user.user_name }}</span>
+                      </div>
+                      <div class="py-1">
+                        <label class="h6 m-0 pe-3">Email:</label>
+                        <span>{{ user.email }}</span>
+                      </div>
+                      <br />
+                      <a class="btn btn-primary" v-on:click="showUser()">
+                        <span class="btn--text">Update</span>
+                        <span class="fas fa-edit"></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Section -->
+    </main>
+    <!-- End Main -->
   </div>
   <div>
     <dialog id="user-details">
@@ -77,11 +146,8 @@ export default {
         </p>
         <button v-on:click="updateUser()">Update</button>
         <button v-on:click="destroyUser()">Delete</button>
-        <br />
         <button>Close</button>
       </form>
     </dialog>
   </div>
 </template>
-
-<style></style>
