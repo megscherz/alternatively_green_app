@@ -78,3 +78,17 @@ img {
   height: 400px;
 }
 </style>
+
+<!-- <div class="col-lg-4 my-3 ps-xl-9"> SEARCH BAR
+            <div class="card">
+              <div class="card-header border-bottom p-3">
+                <span class="h5 m-0">Search</span>
+              </div>
+              <div class="card-body p-3">
+                <form class="d-flex input-group">
+                  <input type="email" class="form-control" placeholder="Search" />
+                  <button class="btn btn-primary flex-shrink-0" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+            </div>
+          </div> -->

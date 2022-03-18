@@ -22,16 +22,16 @@ export default {
                 <span class="arrow"></span>
               </router-link>
             </div>
-            <div v-if="!isLoggedIn" class="pt-4">
+            <div class="pt-4">
               <router-link class="btn btn-dark rounded-pill me-3" to="/signup">
                 <span class="btn--text">Signup</span>
                 <span class="arrow"></span>
               </router-link>
             </div>
           </div>
-          <div class="col-lg-6 my-4">
+          <div class="col-lg-6 my-6">
             <img
-              src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/newscms/2021_24/3471173/210507-amazon-climate-pledge-bd-2x1.jpg"
+              src="https://media.istockphoto.com/photos/zero-waste-cosmetics-picture-id1204067725?b=1&k=20&m=1204067725&s=170667a&w=0&h=kPuzcp-eaxi9YqMdEMMQmH9Uxy_yJ6yYFKJkHso9Bic="
               title=""
               alt=""
             />

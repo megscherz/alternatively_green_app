@@ -71,22 +71,89 @@ export default {
 
 <template>
   <div class="products-show">
-    <div>
-      <h1>{{ product.name }}</h1>
-      <img v-bind:src="product.image_url" alt="" />
-      <p>Description: {{ product.description }}</p>
-      <p>Price: ${{ product.price }}</p>
-      <p>Ingredients: {{ product.ingredients }}</p>
+    <section class="section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 my-3 pe-xl-12">
+            <h6 class="text-primary mb-3">Product</h6>
+            <h3 class="h1">
+              <mark>{{ product.name }}</mark>
+            </h3>
+            <!-- <div class="lead mb-6">
+              Vencer is a HTML5 template based on Sass and Bootstrap 5 with modern and creative multipurpose design you
+              can use it as a startups.
+            </div> -->
+            <div class="media mb-5">
+              <div class="only-icon only-icon-lg text-primary">
+                <i class="icon-tools"></i>
+              </div>
+              <div class="col ps-3">
+                <h5>Description</h5>
+                <p class="m-0">{{ product.description }}</p>
+              </div>
+            </div>
+            <div class="media mb-5">
+              <div class="only-icon only-icon-lg text-primary">
+                <i class="icon-layers"></i>
+              </div>
+              <div class="col ps-3">
+                <h5>Ingredients</h5>
+                <p class="m-0">{{ product.ingredients }}</p>
+              </div>
+            </div>
+            <div class="media mb-5">
+              <div class="only-icon only-icon-lg text-primary">
+                <i class="icon-layers"></i>
+              </div>
+              <div class="col ps-3">
+                <h5>Price</h5>
+                <p class="m-0">${{ product.price }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 my-3">
+            <img v-bind:src="product.image_url" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-sm-6 col-md-4 col-lg-6 my-3">
+                <div class="col-lg-6 my-3 pe-xl-12">
+                  <h6 class="text-primary mb-3">Reviews</h6>
+                </div>
+                <div v-for="review in product.reviews" v-bind:key="review.id" class="hover-top-in">
+                  <div>
+                    <a href="#">
+                      <img class="rounded-3 shadow-sm" src="static/img/1000x700.jpg" title="" alt="" />
+                    </a>
+                  </div>
+                  <div class="mt-n8 hover-top--in">
+                    <div class="mx-3 mx-lg-4 shadow-sm rounded-3 bg-white p-4 position-relative">
+                      <div class="text-muted mb-3">
+                        <i class="far fa-clock me-2"></i>
+                        add date here
+                      </div>
+                      <a class="h5" href="#">{{ review.user.user_name }} says...</a>
+                      <a class="h5" href="#">{{ review.title }}</a>
+                      <p class="pt-3">{{ review.body }}</p>
+                      <p class="pt-3">Star Rating: {{ review.star_rating }}/5</p>
+                      <a class="ms-auto font-w-600 link-effect" href="#">Read More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div>
-      <h3>Reviews:</h3>
-      <div v-for="review in product.reviews" v-bind:key="review.id">
-        <p>{{ review.user.user_name }} says...</p>
-        <p>Title:{{ review.title }}</p>
-        <p>{{ review.image_url }}</p>
-        <p>Review:{{ review.body }}</p>
-        <p>{{ review.star_rating }}/5</p>
-      </div>
+      <div v-for="review in product.reviews" v-bind:key="review.id"></div>
       <button v-on:click="showReview()">Add Your Review Here</button>
       <button v-on:click="updateReview(currentReview)">Update Review</button>
       <div>

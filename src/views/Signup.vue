@@ -26,40 +26,84 @@ export default {
 
 <template>
   <div class="signup">
-    <form v-on:submit.prevent="submit()">
-      <h1>Signup</h1>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div>
-        <label>First Name:</label>
-        <input type="text" v-model="newUserParams.first_name" />
+    <section class="section bg-gray-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-xl-7 pe-xl-9">
+            <div class="section-heading">
+              <h3 class="h1">
+                <mark>New User Signup:</mark>
+              </h3>
+              <div class="lead">Write somethng here.</div>
+            </div>
+            <form
+              class="rd-mailform"
+              data-form-output="form-output-global"
+              data-form-type="contact"
+              method="post"
+              action="static/vendor/mail/bat/rd-mailform.php"
+              v-on:submit.prevent="submit()"
+            >
+              <div class="row">
+                <ul>
+                  <li v-for="error in errors" v-bind:key="error">{{ error }}></li>
+                </ul>
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" v-model="newUserParams.first_name" />
+                    <label class="form-label">First Name</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" v-model="newUserParams.last_name" />
+                    <label class="form-label">Last Name</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" v-model="newUserParams.user_name" />
+                    <label class="form-label">Username</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" v-model="newUserParams.email" />
+                    <label class="form-label">Email</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                    <input type="password" class="form-control" v-model="newUserParams.password" />
+                    <label class="form-label">Password</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                    <input type="password" class="form-control" v-model="newUserParams.password_confirmation" />
+                    <label class="form-label">Password Confirmation</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-floating mb-4">
+                    <input type="text" class="form-control" v-model="newUserParams.image_url" />
+                    <label class="form-label">Profile Picture</label>
+                  </div>
+                </div>
+                <div class="col-12 pt-3">
+                  <button class="btn btn-primary" type="submit" name="send">Create User</button>
+                  <div class="snackbars" id="form-output-global"></div>
+                </div>
+              </div>
+            </form>
+            <div v-if="!isLoggedIn" class="extra-menu d-none d-lg-block ps-4">
+              <router-link to="/login">
+                <span class="btn--text">Or Login Here</span>
+              </router-link>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label>Last Name:</label>
-        <input type="text" v-model="newUserParams.last_name" />
-      </div>
-      <div>
-        <label>Username:</label>
-        <input type="text" v-model="newUserParams.user_name" />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" v-model="newUserParams.email" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" v-model="newUserParams.password" />
-      </div>
-      <div>
-        <label>Password confirmation:</label>
-        <input type="password" v-model="newUserParams.password_confirmation" />
-      </div>
-      <div>
-        <label>Profile Picture:</label>
-        <input type="text" v-model="newUserParams.image_url" />
-      </div>
-      <input type="submit" value="Submit" />
-    </form>
+    </section>
   </div>
 </template>
