@@ -96,7 +96,7 @@ export default {
                 </div>
               </div>
             </form>
-            <div v-if="!isLoggedIn" class="extra-menu d-none d-lg-block ps-4">
+            <div class="extra-menu d-none d-lg-block ps-4">
               <router-link to="/login">
                 <span class="btn--text">Or Login Here</span>
               </router-link>

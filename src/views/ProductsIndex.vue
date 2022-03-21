@@ -39,7 +39,10 @@ export default {
         <div class="row justify-content-center section-heading">
           <div class="col-lg-8 col-xl-7 text-center">
             <h3 class="h1">Our Products</h3>
-            <div class="lead">add something here</div>
+            <div class="lead">
+              See a list of all of our products, Standard and Green.Click on a product to see more information about it
+              as well as the Alternatives for it.
+            </div>
           </div>
         </div>
         <div class="row">
@@ -57,9 +60,6 @@ export default {
                         {{ product.name }}
                       </router-link>
                     </h5>
-                    <!-- <p class="m-0">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
-                    </p> -->
                   </div>
                 </div>
               </div>

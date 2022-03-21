@@ -75,7 +75,7 @@ export default {
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6 my-3 pe-xl-12">
-            <h6 class="text-primary mb-3">Product</h6>
+            <h3 class="text-primary mb-3">Product</h3>
             <h3 class="h1">
               <mark>{{ product.name }}</mark>
             </h3>
@@ -124,13 +124,11 @@ export default {
             <div class="row">
               <div class="col-sm-6 col-md-4 col-lg-6 my-3">
                 <div class="col-lg-6 my-3 pe-xl-12">
-                  <h6 class="text-primary mb-3">Reviews</h6>
+                  <h3 class="text-primary mb-3">Reviews</h3>
                 </div>
                 <div v-for="review in product.reviews" v-bind:key="review.id" class="hover-top-in">
                   <div>
-                    <a href="#">
-                      <img class="rounded-3 shadow-sm" src="static/img/1000x700.jpg" title="" alt="" />
-                    </a>
+                    <img class="rounded-3 shadow-sm" v-bind:src="review.image_url" />
                   </div>
                   <div class="mt-n8 hover-top--in">
                     <div class="mx-3 mx-lg-4 shadow-sm rounded-3 bg-white p-4 position-relative">
@@ -142,7 +140,6 @@ export default {
                       <a class="h5" href="#">{{ review.title }}</a>
                       <p class="pt-3">{{ review.body }}</p>
                       <p class="pt-3">Star Rating: {{ review.star_rating }}/5</p>
-                      <a class="ms-auto font-w-600 link-effect" href="#">Read More</a>
                     </div>
                   </div>
                 </div>
@@ -154,12 +151,22 @@ export default {
     </div>
     <div>
       <div v-for="review in product.reviews" v-bind:key="review.id"></div>
-      <button v-on:click="showReview()">Add Your Review Here</button>
-      <button v-on:click="updateReview(currentReview)">Update Review</button>
+      <div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+              <button type="button" class="btn btn-outline-primary" v-on:click="showReview()">
+                Add Your Review Here
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div>
         <dialog id="review-details">
           <form method="dialog">
-            <h1>New Review</h1>
+            <h1>Add a Review</h1>
             <p>
               Title:
               <input type="text" v-model="newReviewParams.title" />
@@ -178,20 +185,50 @@ export default {
             </p>
             <button v-on:click="createReview()">Create</button>
             <button v-on:click="destroyReview(currentReview)">Delete</button>
+            <button v-on:click="updateReview(currentReview)">Update Review</button>
             <button>Close</button>
           </form>
         </dialog>
       </div>
     </div>
-    <h3>Alternatives for {{ product.name }}</h3>
-    <div v-for="alternative in product.alternatives" :key="alternative.id">
-      <img v-bind:src="alternative.image_url" alt="" />
-      <h1>{{ alternative.name }}</h1>
-      <router-link v-bind:to="`/products/${alternative.id}`">See Alternatives</router-link>
-      <br />
+    <br />
+    <div class="container">
+      <div class="row">
+        <h3 class="text-primary mb-3">Alternatives for {{ product.name }}</h3>
+        <div v-for="alternative in product.alternatives" :key="alternative.id" class="col-sm-6 col-lg-4 my-3">
+          <div class="card hover-top">
+            <img class="card-img-top" v-bind:src="alternative.image_url" v-bind:alt="alternative.name" />
+            <div class="card-body pt-0">
+              <div class="icon icon-primary rounded-circle mt-n5 mb-2">
+                <i class="fas fa-apple-alt"></i>
+              </div>
+              <div class="media align-items-center">
+                <div class="media-body pe-3">
+                  <h5 class="mb-2 pt-2">
+                    <router-link v-bind:to="`/products/${alternative.id}`" class="text-dark stretched-link">
+                      {{ alternative.name }}
+                      See Alternative
+                    </router-link>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <button type="button" class="btn btn-outline-primary">
+              <router-link v-bind:to="`/products`">Back to All Products</router-link>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <router-link v-bind:to="`/products`">Back to All Products</router-link>
 </template>
 
 <style></style>
