@@ -9,11 +9,13 @@ export default {
       reviews: [],
       currentReview: [],
       newReviewParams: {},
+      nameFilter: "",
     };
   },
   created: function () {
     this.indexProducts();
   },
+
   methods: {
     indexProducts: function () {
       axios.get("/products").then((response) => {
@@ -27,6 +29,9 @@ export default {
       this.editProductParams = product;
       document.querySelector("#product-details").showModal();
     },
+    // relativeDate: function (date) {
+    //   return dayjs().to(dayjs(date));
+    // },
   },
 };
 </script>
@@ -42,6 +47,8 @@ export default {
             <div class="lead">
               See a list of all of our products, Standard and Green.Click on a product to see more information about it
               as well as the Alternatives for it.
+              <p></p>
+              <!-- <div v-for="product in filteredProducts()" v-bind:key="product.id"></div> -->
             </div>
           </div>
         </div>
@@ -51,7 +58,8 @@ export default {
               <img class="card-img-top" v-bind:src="product.image_url" v-bind:alt="product.name" />
               <div class="card-body pt-0">
                 <div class="icon icon-primary rounded-circle mt-n5 mb-2">
-                  <i class="fas fa-apple-alt"></i>
+                  <i class="fa-brands fa-envira"></i>
+                  <!-- <i class="fa-regular fa-circle-s"></i> -->
                 </div>
                 <div class="media align-items-center">
                   <div class="media-body pe-3">
@@ -78,17 +86,3 @@ img {
   height: 400px;
 }
 </style>
-
-<!-- <div class="col-lg-4 my-3 ps-xl-9"> SEARCH BAR
-            <div class="card">
-              <div class="card-header border-bottom p-3">
-                <span class="h5 m-0">Search</span>
-              </div>
-              <div class="card-body p-3">
-                <form class="d-flex input-group">
-                  <input type="email" class="form-control" placeholder="Search" />
-                  <button class="btn btn-primary flex-shrink-0" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-              </div>
-            </div>
-          </div> -->

@@ -15,6 +15,7 @@ export default {
         product_id: this.$route.params.id,
       },
       errors: {},
+      currentUserId: localStorage.user_id,
     };
   },
   created: function () {
@@ -140,6 +141,8 @@ export default {
                       <a class="h5" href="#">{{ review.title }}</a>
                       <p class="pt-3">{{ review.body }}</p>
                       <p class="pt-3">Star Rating: {{ review.star_rating }}/5</p>
+                      <button v-on:click="updateReview(review)"></button>
+                      <button v-on:click="destroyReview(review)"></button>
                     </div>
                   </div>
                 </div>
@@ -150,42 +153,96 @@ export default {
       </div>
     </div>
     <div>
-      <div v-for="review in product.reviews" v-bind:key="review.id"></div>
-      <div>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-              <button type="button" class="btn btn-outline-primary" v-on:click="showReview()">
-                Add Your Review Here
-              </button>
+      <div v-for="review in product.reviews" v-bind:key="review.id" class="products-new">
+        <section class="section bg-gray-100">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-xl-7 pe-xl-9">
+                <div class="section-heading">
+                  <h3 class="h1">
+                    <mark>Add Your Own Review</mark>
+                  </h3>
+                  <div class="lead">
+                    Alternatively Green appreciates your experiences and reviews on products. We appreciate them so much
+                    that we're allowing you to add products to our page!
+                  </div>
+                </div>
+                <form
+                  class="rd-mailform"
+                  data-form-output="form-output-global"
+                  data-form-type="contact"
+                  method="post"
+                  action="static/vendor/mail/bat/rd-mailform.php"
+                  v-on:submit.prevent="createReview()"
+                >
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" v-model="newReviewParams.title" />
+                        <label class="form-label">Title</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" v-model="newReviewParams.image_url" />
+                        <label class="form-label">Product Image URL (optional)</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-floating mb-4">
+                        <input type="integer" class="form-control" v-model="newReviewParams.star_rating" />
+                        <label class="form-label">Star Rating</label>
+                      </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="col-12">
+                      <div class="form-floating mb-4">
+                        <textarea
+                          class="form-control"
+                          id="contact-message"
+                          name="message"
+                          rows="3"
+                          style="height: 150px"
+                          v-model="newReviewParams.body"
+                        ></textarea>
+                        <label class="form-label" for="contact-message">Review</label>
+                      </div>
+                    </div>
+                    <div class="col-12 pt-3">
+                      <button class="btn btn-primary" type="submit" name="send">Create Review</button>
+                      <div class="snackbars" id="form-output-global"></div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-
-      <div>
+      <div v-for="review in product.reviews" v-bind:key="review.id">
         <dialog id="review-details">
           <form method="dialog">
-            <h1>Add a Review</h1>
+            <h1>Edit Review</h1>
             <p>
               Title:
-              <input type="text" v-model="newReviewParams.title" />
+              <input type="text" v-model="review.title" />
             </p>
             <p>
               Image:
-              <input type="text" v-model="newReviewParams.image_url" />
+              <input type="text" v-model="review.image_url" />
             </p>
             <p>
               Review:
-              <textarea rows="5" cols="60" v-model="newReviewParams.body"></textarea>
+              <textarea rows="5" cols="60" v-model="review.body"></textarea>
             </p>
             <p>
               Star Rating:
-              <input type="text" v-model="newReviewParams.star_rating" />
+              <input type="text" v-model="review.star_rating" />
             </p>
-            <button v-on:click="createReview()">Create</button>
-            <button v-on:click="destroyReview(currentReview)">Delete</button>
-            <button v-on:click="updateReview(currentReview)">Update Review</button>
+            <button v-on:click="updateReview()">Update</button>
+            <button v-on:click="destroyReview()">Delete</button>
             <button>Close</button>
           </form>
         </dialog>

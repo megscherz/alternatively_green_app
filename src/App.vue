@@ -23,6 +23,12 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <!-- End Mobile Toggle -->
+          <div>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+              <button class="btn btn-success" type="submit">Search</button>
+            </form>
+          </div>
           <!-- Menu -->
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
@@ -38,19 +44,19 @@
             </ul>
             <div v-if="!isLoggedIn" class="extra-menu d-none d-lg-block ps-4">
               <router-link class="btn btn-primary btn-sm rounded-pill" to="/signup">
-                <i class="fas fa-solid fa-leaf-heart"></i>
+                <i class="fa-brands fa-envira"></i>
                 <span class="btn--text">Sign up</span>
               </router-link>
             </div>
             <div v-if="!isLoggedIn" class="extra-menu d-none d-lg-block ps-4">
               <router-link class="btn btn-primary btn-sm rounded-pill" to="/login">
-                <span class="fa-thin fa-leaf-heart"></span>
+                <i class="fa-brands fa-envira"></i>
                 <span class="btn--text">Login</span>
               </router-link>
             </div>
             <div v-if="isLoggedIn" class="extra-menu d-none d-lg-block ps-4">
               <router-link class="btn btn-primary btn-sm rounded-pill" to="/users/me">
-                <span icon="fa-thin fa-leaf-heart"></span>
+                <i class="fa-brands fa-envira"></i>
                 <span class="btn--text">User Account</span>
               </router-link>
             </div>

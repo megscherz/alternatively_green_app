@@ -45,23 +45,6 @@ export default {
 <template>
   <div class="users-show">
     <main>
-      <!-- Page Title -->
-      <!-- <section class="parallax effect-section page-heading" style="background-image: url(static/img/1600x900.jpg)">
-        <div class="mask bg-black opacity-8"></div>
-        <div class="container position-relative">
-          <div class="row align-items-center justify-content-center min-vh-40">
-            <div class="col-lg-8 text-center">
-              <h1 class="display-4 text-white m-0">User Account</h1>
-              <ol class="breadcrumb light mb-0 mt-3 justify-content-center">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">User Account</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      </section> -->
-      <!-- End Page Title -->
-      <!-- Section -->
       <section class="section">
         <div class="container">
           <div class="row justify-content-center">
