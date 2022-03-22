@@ -66,7 +66,7 @@ export default {
                         data-autoplay="true"
                       >
                         <div>
-                          <img class="rounded" v-bind:src="user.image_url" alt="" />
+                          <img class="rounded" v-bind:src="user.image_url" />
                         </div>
                       </div>
                     </div>

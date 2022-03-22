@@ -249,7 +249,7 @@ export default {
             <img class="card-img-top" v-bind:src="alternative.image_url" v-bind:alt="alternative.name" />
             <div class="card-body pt-0">
               <div class="icon icon-primary rounded-circle mt-n5 mb-2">
-                <i class="fas fa-apple-alt"></i>
+                <i class="fa-brands fa-envira"></i>
               </div>
               <div class="media align-items-center">
                 <div class="media-body pe-3">
