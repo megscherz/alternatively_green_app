@@ -84,11 +84,11 @@
                 <i class="icon-map"></i>
               </div>
               <div class="media-body ps-4">
-                <h6>Vencer Yoga Center</h6>
+                <h6>Alternatively Green Warehouse</h6>
                 <p class="m-0">
-                  301 The Greenhouse
+                  123 Main St.
                   <br />
-                  London, E2 8DY UK
+                  Chicago, IL 60657
                 </p>
               </div>
             </div>
@@ -101,9 +101,9 @@
               <div class="media-body ps-4">
                 <h6>Our Contact Info</h6>
                 <p class="m-0">
-                  support@domain.com
+                  support@alternativelygreen.com
                   <br />
-                  820-885-3321
+                  555-555-5555
                 </p>
               </div>
             </div>

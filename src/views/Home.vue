@@ -10,7 +10,7 @@ export default {
 
 <template>
   <div class="home">
-    <section class="bg-gray-100 section">
+    <section class="bg-gray-100">
       <div class="container pt-10">
         <div class="row align-items-center">
           <div class="col-lg-6 my-4 pe-xl-10">
@@ -42,4 +42,9 @@ export default {
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  width: 600px;
+  height: 500px;
+}
+</style>

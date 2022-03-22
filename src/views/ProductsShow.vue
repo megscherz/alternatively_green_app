@@ -36,11 +36,12 @@ export default {
         .post("/reviews", this.newReviewParams)
         .then((response) => {
           console.log("review create", response);
-          this.reviews.push("/reviews");
+          // this.reviews.push("/reviews");
+          this.product.reviews.push(response.data);
           this.newReviewParams = {};
         })
         .catch((error) => {
-          console.log(error.response.data.errors);
+          this.errors = error.response.data.errors;
         });
     },
     showReview: function (review) {
@@ -48,22 +49,22 @@ export default {
       this.editReviewParams = review;
       document.querySelector("#review-details").showModal();
     },
-    updateReview: function (review) {
-      axios
-        .patch("/reviews/" + review.id, this.editReviewParams)
-        .then((response) => {
-          console.log("reviews update", response);
-          this.currentReview = {};
-        })
-        .catch((error) => {
-          console.log(error.response.data.errors);
-        });
-    },
+    // updateReview: function (review) {
+    //   axios
+    //     .patch("/reviews/" + review.id, this.editReviewParams)
+    //     .then((response) => {
+    //       console.log("reviews update", response);
+    //       this.currentReview = {};
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.response.data.errors);
+    //     });
+    // },
     destroyReview: function (review) {
-      axios.delete("/reviews" + review.id).then((response) => {
+      axios.delete("/reviews/" + review.id).then((response) => {
         console.log("reviews destroy", response);
-        var index = this.review.indexOf(review);
-        this.reviews.splice(index, 1);
+        var index = this.product.reviews.indexOf(review);
+        this.product.reviews.splice(index, 1);
       });
     },
   },
@@ -72,7 +73,7 @@ export default {
 
 <template>
   <div class="products-show">
-    <section class="section">
+    <section>
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6 my-3 pe-xl-12">
@@ -80,13 +81,9 @@ export default {
             <h3 class="h1">
               <mark>{{ product.name }}</mark>
             </h3>
-            <!-- <div class="lead mb-6">
-              Vencer is a HTML5 template based on Sass and Bootstrap 5 with modern and creative multipurpose design you
-              can use it as a startups.
-            </div> -->
             <div class="media mb-5">
               <div class="only-icon only-icon-lg text-primary">
-                <i class="icon-tools"></i>
+                <i class="icon-layers"></i>
               </div>
               <div class="col ps-3">
                 <h5>Description</h5>
@@ -118,33 +115,28 @@ export default {
         </div>
       </div>
     </section>
-    <div class="section">
+    <div>
       <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="row">
-              <div class="col-sm-6 col-md-4 col-lg-6 my-3">
-                <div class="col-lg-6 my-3 pe-xl-12">
-                  <h3 class="text-primary mb-3">Reviews</h3>
+        <div>
+          <h3 class="text-primary">Reviews</h3>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row justify-content-center">
+          <div v-for="review in product.reviews" v-bind:key="review.id" class="col-8 my-3 col-lg-4">
+            <div class="mt-n8 hover-top--in">
+              <div class="shadow-sm rounded-3 bg-white p-4">
+                <div class="text-muted mb-3">
+                  <i class="far fa-clock me-2"></i>
+                  {{ review.created_at }}
                 </div>
-                <div v-for="review in product.reviews" v-bind:key="review.id" class="hover-top-in">
-                  <div>
-                    <img class="rounded-3 shadow-sm" v-bind:src="review.image_url" />
-                  </div>
-                  <div class="mt-n8 hover-top--in">
-                    <div class="mx-3 mx-lg-4 shadow-sm rounded-3 bg-white p-4 position-relative">
-                      <div class="text-muted mb-3">
-                        <i class="far fa-clock me-2"></i>
-                        add date here
-                      </div>
-                      <a class="h5" href="#">{{ review.user.user_name }} says...</a>
-                      <a class="h5" href="#">{{ review.title }}</a>
-                      <p class="pt-3">{{ review.body }}</p>
-                      <p class="pt-3">Star Rating: {{ review.star_rating }}/5</p>
-                      <button v-on:click="updateReview(review)"></button>
-                      <button v-on:click="destroyReview(review)"></button>
-                    </div>
-                  </div>
+                <div>
+                  <p class="h5">{{ review.user.user_name }} says...</p>
+                  <p class="h5">{{ review.title }}</p>
+                  <p class="pt-3">{{ review.body }}</p>
+                  <p class="pt-3">Star Rating: {{ review.star_rating }}/5</p>
+                  <button v-on:click="destroyReview(review)">Delete</button>
                 </div>
               </div>
             </div>
@@ -153,7 +145,7 @@ export default {
       </div>
     </div>
     <div>
-      <div v-for="review in product.reviews" v-bind:key="review.id" class="products-new">
+      <div class="review-details">
         <section class="section bg-gray-100">
           <div class="container">
             <div class="row">
@@ -191,7 +183,7 @@ export default {
                     <div class="col-sm-6">
                       <div class="form-floating mb-4">
                         <input type="integer" class="form-control" v-model="newReviewParams.star_rating" />
-                        <label class="form-label">Star Rating</label>
+                        <label class="form-label">Star Rating (out of 5)</label>
                       </div>
                     </div>
 
@@ -211,7 +203,7 @@ export default {
                       </div>
                     </div>
                     <div class="col-12 pt-3">
-                      <button class="btn btn-primary" type="submit" name="send">Create Review</button>
+                      <button class="btn btn-primary" type="submit" name="send">Create A Review</button>
                       <div class="snackbars" id="form-output-global"></div>
                     </div>
                   </div>
@@ -221,7 +213,7 @@ export default {
           </div>
         </section>
       </div>
-      <div v-for="review in product.reviews" v-bind:key="review.id">
+      <!-- <div v-for="review in product.reviews" v-bind:key="review.id">
         <dialog id="review-details">
           <form method="dialog">
             <h1>Edit Review</h1>
@@ -246,7 +238,7 @@ export default {
             <button>Close</button>
           </form>
         </dialog>
-      </div>
+      </div> -->
     </div>
     <br />
     <div class="container">
@@ -288,4 +280,9 @@ export default {
   </div>
 </template>
 
-<style></style>
+<style>
+/* img {
+  width: 300px;
+  height: 400px;
+} */
+</style>
