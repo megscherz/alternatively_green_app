@@ -53,23 +53,13 @@ export default {
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-5 col-xl-6">
-                      <div
-                        class="owl-carousel owl-nav-rounded"
-                        data-items="1"
-                        data-nav-arrow="true"
-                        data-nav-dots="false"
-                        data-lg-items="1"
-                        data-md-items="1"
-                        data-sm-items="1"
-                        data-xs-items="1"
-                        data-space="20"
-                        data-autoplay="true"
-                      >
+                      <div>
                         <div>
                           <img class="rounded" v-bind:src="user.image_url" />
                         </div>
                       </div>
                     </div>
+
                     <div class="col-lg-7 col-xl-6">
                       <div class="bg-dark d-inline-block py-3 px-5 rounded mt-3 mb-5">
                         <h3 class="text-primary">{{ user.first_name + " " + user.last_name }}'s Account</h3>

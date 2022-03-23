@@ -9,11 +9,19 @@ export default {
       reviews: [],
       currentReview: [],
       newReviewParams: {},
-      nameFilter: "",
+      productSearch: "",
     };
   },
   created: function () {
     this.indexProducts();
+  },
+
+  computed: {
+    filteredProducts() {
+      return this.products.filter((product) => {
+        return product.name.toLowerCase().includes(this.productSearch);
+      });
+    },
   },
 
   methods: {
@@ -29,9 +37,9 @@ export default {
       this.editProductParams = product;
       document.querySelector("#product-details").showModal();
     },
-    // relativeDate: function (date) {
-    //   return dayjs().to(dayjs(date));
-    // },
+    scrollToTop: function () {
+      window.scrollTo(0, 0);
+    },
   },
 };
 </script>
@@ -48,18 +56,25 @@ export default {
               See a list of all of our products, Standard and Green.Click on a product to see more information about it
               as well as the Alternatives for it.
               <p></p>
-              <!-- <div v-for="product in filteredProducts()" v-bind:key="product.id"></div> -->
+              <form class="d-flex">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  v-model="productSearch"
+                />
+              </form>
             </div>
           </div>
         </div>
         <div class="row">
-          <div v-for="product in products" v-bind:key="product.id" class="col-sm-6 col-lg-4 my-3">
+          <div v-for="product in filteredProducts" v-bind:key="product.id" class="col-sm-6 col-lg-4 my-3">
             <div class="card hover-top">
               <img class="card-img-top" v-bind:src="product.image_url" v-bind:alt="product.name" />
               <div class="card-body pt-0">
                 <div class="icon icon-primary rounded-circle mt-n5 mb-2">
                   <i class="fa-brands fa-envira"></i>
-                  <!-- <i class="fa-regular fa-circle-s"></i> -->
                 </div>
                 <div class="media align-items-center">
                   <div class="media-body pe-3">
@@ -73,16 +88,17 @@ export default {
               </div>
             </div>
           </div>
+          <br />
+        </div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="text-center">
+              <button class="btn btn-primary" v-on:click="scrollToTop()">Back to Top</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
     <!-- End Section -->
   </div>
 </template>
-
-<style>
-img {
-  width: 300px;
-  height: 400px;
-}
-</style>

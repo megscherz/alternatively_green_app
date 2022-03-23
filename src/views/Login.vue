@@ -36,12 +36,12 @@ export default {
     <section class="section bg-gray-100">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6 col-xl-7 pe-xl-9">
+          <div class="col-lg-12">
             <div class="section-heading">
               <h3 class="h1">
                 <mark>Login:</mark>
               </h3>
-              <div class="lead">Write somethng here.</div>
+              <div class="lead">Login to your existing account here.</div>
             </div>
             <form v-on:submit.prevent="submit()">
               <div class="row">

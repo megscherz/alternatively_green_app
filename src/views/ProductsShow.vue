@@ -1,5 +1,8 @@
 <script>
 import axios from "axios";
+import dayjs from "dayjs";
+var relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 
 export default {
   data: function () {
@@ -19,6 +22,7 @@ export default {
     };
   },
   created: function () {
+    this.scrollToTop();
     axios.get(`/products/${this.$route.params.id}`).then((response) => {
       console.log("Products Show", response.data);
       this.product = response.data;
@@ -66,6 +70,12 @@ export default {
         var index = this.product.reviews.indexOf(review);
         this.product.reviews.splice(index, 1);
       });
+    },
+    relativeDate: function (date) {
+      return dayjs().to(dayjs(date));
+    },
+    scrollToTop: function () {
+      window.scrollTo(0, 0);
     },
   },
 };
@@ -129,14 +139,14 @@ export default {
               <div class="shadow-sm rounded-3 bg-white p-4">
                 <div class="text-muted mb-3">
                   <i class="far fa-clock me-2"></i>
-                  {{ review.created_at }}
+                  Created at: {{ relativeDate(date) }}
                 </div>
                 <div>
                   <p class="h5">{{ review.user.user_name }} says...</p>
                   <p class="h5">{{ review.title }}</p>
                   <p class="pt-3">{{ review.body }}</p>
                   <p class="pt-3">Star Rating: {{ review.star_rating }}/5</p>
-                  <button v-on:click="destroyReview(review)">Delete</button>
+                  <button class="btn btn-primary" v-on:click="destroyReview(review)">Delete</button>
                 </div>
               </div>
             </div>
@@ -149,7 +159,7 @@ export default {
         <section class="section bg-gray-100">
           <div class="container">
             <div class="row">
-              <div class="col-lg-6 col-xl-7 pe-xl-9">
+              <div class="col-lg-12">
                 <div class="section-heading">
                   <h3 class="h1">
                     <mark>Add Your Own Review</mark>
@@ -176,14 +186,14 @@ export default {
                     </div>
                     <div class="col-sm-6">
                       <div class="form-floating mb-4">
-                        <input type="text" class="form-control" v-model="newReviewParams.image_url" />
-                        <label class="form-label">Product Image URL (optional)</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-floating mb-4">
                         <input type="integer" class="form-control" v-model="newReviewParams.star_rating" />
                         <label class="form-label">Star Rating (out of 5)</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-floating mb-4">
+                        <input type="text" class="form-control" v-model="newReviewParams.image_url" />
+                        <label class="form-label">Product Image URL (optional)</label>
                       </div>
                     </div>
 
@@ -213,32 +223,6 @@ export default {
           </div>
         </section>
       </div>
-      <!-- <div v-for="review in product.reviews" v-bind:key="review.id">
-        <dialog id="review-details">
-          <form method="dialog">
-            <h1>Edit Review</h1>
-            <p>
-              Title:
-              <input type="text" v-model="review.title" />
-            </p>
-            <p>
-              Image:
-              <input type="text" v-model="review.image_url" />
-            </p>
-            <p>
-              Review:
-              <textarea rows="5" cols="60" v-model="review.body"></textarea>
-            </p>
-            <p>
-              Star Rating:
-              <input type="text" v-model="review.star_rating" />
-            </p>
-            <button v-on:click="updateReview()">Update</button>
-            <button v-on:click="destroyReview()">Delete</button>
-            <button>Close</button>
-          </form>
-        </dialog>
-      </div> -->
     </div>
     <br />
     <div class="container">
@@ -279,10 +263,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style>
-/* img {
-  width: 300px;
-  height: 400px;
-} */
-</style>

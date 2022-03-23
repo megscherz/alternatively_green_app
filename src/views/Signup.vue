@@ -29,12 +29,12 @@ export default {
     <section class="section bg-gray-100">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6 col-xl-7 pe-xl-9">
+          <div class="col-lg-12">
             <div class="section-heading">
               <h3 class="h1">
                 <mark>New User Signup:</mark>
               </h3>
-              <div class="lead">Write somethng here.</div>
+              <div class="lead">Sign up for an account here.</div>
             </div>
             <form
               class="rd-mailform"
@@ -84,7 +84,7 @@ export default {
                     <label class="form-label">Password Confirmation</label>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                   <div class="form-floating mb-4">
                     <input type="text" class="form-control" v-model="newUserParams.image_url" />
                     <label class="form-label">Profile Picture</label>

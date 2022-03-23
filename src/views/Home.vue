@@ -11,11 +11,15 @@ export default {
 <template>
   <div class="home">
     <section class="bg-gray-100">
-      <div class="container pt-10">
+      <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6 my-4 pe-xl-10">
             <h1 class="display-1">Do green better with Alternatively Green</h1>
-            <p class="lead w-lg-80">Alternatively Green is a GREAT COMPANY!</p>
+            <p class="lead w-lg-80">
+              Alternatively Green is a company with big, green dreams. We provide sustainable, affordable alternatives
+              for everyday household items. Click "All Products" to see all the products we currently have or "Signup"
+              to create a user account.
+            </p>
             <div class="pt-4">
               <router-link class="btn btn-dark rounded-pill me-3" to="/products">
                 <span class="btn--text">All Products</span>
@@ -41,10 +45,3 @@ export default {
     </section>
   </div>
 </template>
-
-<style>
-img {
-  width: 600px;
-  height: 500px;
-}
-</style>
