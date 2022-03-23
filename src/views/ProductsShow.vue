@@ -148,7 +148,9 @@ export default {
                   <p class="h5">{{ review.title }}</p>
                   <p class="pt-3">{{ review.body }}</p>
                   <p class="pt-3">Star Rating: {{ review.star_rating }}/5</p>
-                  <button class="btn btn-primary" v-on:click="destroyReview(review)">Delete</button>
+                  <div>
+                    <button class="btn btn-primary" v-on:click="destroyReview(review)">Delete</button>
+                  </div>
                 </div>
               </div>
             </div>

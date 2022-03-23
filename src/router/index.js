@@ -11,7 +11,7 @@ import ProductsNew from "../views/ProductsNew.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
-  { path: "/about", name: "About", component: () => import(/* webpackChunkName: "about" */ "../views/About.vue") },
+  // { path: "/about", name: "About", component: () => import(/* webpackChunkName: "about" */ "../views/About.vue") },
   { path: "/signup", name: "signup", component: Signup },
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
@@ -19,7 +19,6 @@ const routes = [
   { path: "/products", name: "products-index", component: ProductsIndex },
   { path: "/products/:id", name: "products-show", component: ProductsShow },
   { path: "/products/new", name: "products-new", component: ProductsNew },
-  // { path: "/reviews/new", name: "reviews-new", component: ReviewsNew },
 ];
 
 const router = createRouter({
