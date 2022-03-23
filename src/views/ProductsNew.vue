@@ -30,7 +30,7 @@ export default {
     <section class="section bg-gray-100">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6 col-xl-7 pe-xl-9">
+          <div class="col-lg-12">
             <div class="section-heading">
               <h3 class="h1">
                 <mark>New Product:</mark>
@@ -91,6 +91,7 @@ export default {
                   />
                   <label for="standard">Standard Product</label>
                 </div>
+                <br />
                 <br />
                 <br />
                 <div class="col-12">

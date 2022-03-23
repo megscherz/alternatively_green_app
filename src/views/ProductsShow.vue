@@ -19,9 +19,11 @@ export default {
       },
       errors: {},
       currentUserId: localStorage.user_id,
+      date: "2022-02-10 17:16:31.937083",
     };
   },
   created: function () {
+    console.log(dayjs().to(dayjs("2022-02-10 17:16:31.937083")));
     this.scrollToTop();
     axios.get(`/products/${this.$route.params.id}`).then((response) => {
       console.log("Products Show", response.data);
@@ -139,7 +141,7 @@ export default {
               <div class="shadow-sm rounded-3 bg-white p-4">
                 <div class="text-muted mb-3">
                   <i class="far fa-clock me-2"></i>
-                  Created at: {{ relativeDate(date) }}
+                  {{ relativeDate(date) }}
                 </div>
                 <div>
                   <p class="h5">{{ review.user.user_name }} says...</p>
